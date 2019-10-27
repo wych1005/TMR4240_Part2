@@ -79,5 +79,5 @@ kalman_data = struct('M',   M, ...
                      'Ts',    Ts);
 save('kalman_data.mat', '-struct', 'kalman_data');
 
-clear EKF_2
+clear EKF
 % sim('part2.slx')
