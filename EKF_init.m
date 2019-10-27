@@ -1,13 +1,13 @@
 %% Wave model
 % Wave periods
-T_w1 = 10;
+T_w1 = 5;
 T_w2 = 5;
 T_w3 = 5;
 
 % Wave damping
 zeta_1 = 0.05;
-zeta_2 = 0.1;
-zeta_3 = 0.1;
+zeta_2 = 0.05;
+zeta_3 = 0.05;
 
 % Wave frequencies and damping
 Omega = diag(2*pi ./ [T_w1 T_w2 T_w3]);
@@ -18,9 +18,9 @@ A_w = [zeros(size(Omega)),  eye(size(Omega));
 C_w = [zeros(3) eye(3)];
 
 % Noise
-K_w1 = 2;
-K_w2 = 3;
-K_w3 = 4;
+K_w1 = 1;
+K_w2 = 1;
+K_w3 = 1;
 K_w = diag([K_w1 K_w2 K_w3]);
        
 E_w = [zeros(3)
@@ -59,8 +59,8 @@ E = [E_w            zeros(6,3);
 H = [C_w     eye(3)     zeros(3, 6)];
 
 %%
-Q = diag([1000 10000 1000 0.00001 1000000 0.00001]);
-R = diag([10 1 1000]);
+Q = diag([0.1 0.1 0.1 1 1 1]);
+R = diag([0.01 0.01 0.1]);
 P_0_priori = eye(15)*.1;    
 x0 = zeros(15, 1);
 
@@ -80,4 +80,4 @@ kalman_data = struct('M',   M, ...
 save('kalman_data.mat', '-struct', 'kalman_data');
 
 clear EKF
-% sim('part2.slx')
+% sim('simulink/part2.slx')
