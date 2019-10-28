@@ -58,13 +58,13 @@ E = [E_w            zeros(6,3);
      
 H = [C_w     eye(3)     zeros(3, 6)];
 
-%%
+%% Tuning matrices for the kalman filter
 Q = diag([.1 .1 .01 10 10 10]);
 R = diag([0.001 .001 0.001]);
 P_0_priori = eye(15)*.1;    
 x0 = zeros(15, 1);
 
- %%
+%% 
 kalman_data = struct('M',   M, ...
                      'D',   D, ...
                      'H',     H, ...
@@ -80,4 +80,3 @@ kalman_data = struct('M',   M, ...
 save('kalman_data.mat', '-struct', 'kalman_data');
 
 clear EKF
-% sim('simulink/part2.slx')
