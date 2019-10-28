@@ -2,3 +2,9 @@ simulink/slprj
 simulink/*.slxc
 simulink/*.autosave
 simulink/.*
+simulink/*.asv
+slprj
+*.slxc
+*.autosave
+.*
+*.asv
