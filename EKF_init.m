@@ -1,8 +1,8 @@
 %% Wave model
 % Wave periods
-T_w1 = 5;
-T_w2 = 5;
-T_w3 = 5;
+T_w1 = 20;
+T_w2 = 20;
+T_w3 = 20;
 
 % Wave damping
 zeta_1 = 0.05;
@@ -27,15 +27,15 @@ E_w = [zeros(3)
        K_w];
    
 %% Bias model
-T_b1 = 1;
-T_b2 = 1;
-T_b3 = 1;
+T_b1 = 50;
+T_b2 = 50;
+T_b3 = 100;
 T_b = diag([T_b1, T_b2, T_b3]);
 
 % Noise
-E_b1 = 1;
-E_b2 = 1;
-E_b3 = 1;
+E_b1 = 20;
+E_b2 = 20;
+E_b3 = 100;
 E_b = diag([E_b1 E_b2 E_b3]);
 
 
@@ -59,8 +59,8 @@ E = [E_w            zeros(6,3);
 H = [C_w     eye(3)     zeros(3, 6)];
 
 %%
-Q = diag([0.1 0.1 0.1 1 1 1]);
-R = diag([0.01 0.01 0.1]);
+Q = diag([.1 .1 .01 10 10 10]);
+R = diag([0.001 .01 0.1]);
 P_0_priori = eye(15)*.1;    
 x0 = zeros(15, 1);
 

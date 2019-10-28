@@ -6,9 +6,12 @@ end
 eta = input(1:3);
 tau = input(4:6);
 
-persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi
+persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi idx total
 
 if isempty(init_flag)
+    time = 0;
+    total = 0;
+    idx = 0;
     init_flag = 1
     data = load('kalman_data.mat');
     
@@ -25,22 +28,24 @@ if isempty(init_flag)
             sin(psi)  cos(psi) 0
             0         0        1];   
     
+    % Set up f(x) symbolically as an anonymous function
     f_x = @(xi, eta, b, nu) ...
         [data.A_w * xi
         R_psi(eta(3)) * nu
        -data.T_b\b
        -data.M\data.D*nu + data.M\R_psi(eta(3)).'*b];
    
-    f_x_jacobi_sym = jacobian(f_x(xi, eta_sym, b, nu),...
+    % Calculate the jacobian of f(x) symbolically
+    f_x_jacobi_sym = jacobian(f_x(xi, eta_sym, b, nu), ...
                             [xi.' eta_sym.' b.' nu.']);
                         
+    % Create an anonymous function of the symbolical jacobian of f(x)
     f_x_jacobi = matlabFunction(f_x_jacobi_sym, ...
                                 'Vars', {[xi.' eta_sym.' b.' nu.'].'});
 end
 
-
 % Compute the kalmain gain
-K = (P_pri * data.H')/(data.H * P_pri * data.H' + data.R)
+K = (P_pri * data.H')/(data.H * P_pri * data.H' + data.R);
 
 % Update the estimate with measurements, gives aposteriori estimates
 x_hat = x_pri + K * (eta - data.H*x_pri);
@@ -60,4 +65,3 @@ Gamma = data.Ts * data.E;
 
 P_pri = Phi * P * Phi' + Gamma * data.Q * Gamma';
 x_pri = f_xuk;
-
