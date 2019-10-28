@@ -6,12 +6,9 @@ end
 eta = input(1:3);
 tau = input(4:6);
 
-persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi idx total
+persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi
 
 if isempty(init_flag)
-    time = 0;
-    total = 0;
-    idx = 0;
     init_flag = 1
     data = load('kalman_data.mat');
     
