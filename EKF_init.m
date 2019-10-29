@@ -1,13 +1,14 @@
+disp('EKF Init');
 %% Wave model
 % Wave periods
-T_w1 = 20;
-T_w2 = 20;
-T_w3 = 20;
+T_w1 = 9;
+T_w2 = 9;
+T_w3 = 9;
 
 % Wave damping
-zeta_1 = 0.05;
-zeta_2 = 0.05;
-zeta_3 = 0.08;
+zeta_1 = 0.07;
+zeta_2 = 0.07;
+zeta_3 = 0.07;
 
 % Wave frequencies and damping
 Omega = diag(2*pi ./ [T_w1 T_w2 T_w3]);

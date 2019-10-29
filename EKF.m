@@ -9,7 +9,7 @@ tau = input(4:6);
 persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi
 
 if isempty(init_flag)
-    init_flag = 1
+    init_flag = 1;
     data = load('kalman_data.mat');
     
     P_pri = data.P0;
