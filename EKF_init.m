@@ -1,4 +1,5 @@
 disp('EKF Init');
+clear EKF_func
 %% Wave model
 % Wave periods
 T_w1 = 9;
@@ -6,9 +7,9 @@ T_w2 = 9;
 T_w3 = 9;
 
 % Wave damping
-zeta_1 = 0.07;
-zeta_2 = 0.07;
-zeta_3 = 0.07;
+zeta_1 = 0.02;
+zeta_2 = 0.02;
+zeta_3 = 0.02;
 
 % Wave frequencies and damping
 Omega = diag(2*pi ./ [T_w1 T_w2 T_w3]);
@@ -19,24 +20,24 @@ A_w = [zeros(size(Omega)),  eye(size(Omega));
 C_w = [zeros(3) eye(3)];
 
 % Noise
-K_w1 = 1;
-K_w2 = 1;
-K_w3 = 0.1;
+K_w1 = .5;
+K_w2 = .1;
+K_w3 = 0.01;
 K_w = diag([K_w1 K_w2 K_w3]);
        
 E_w = [zeros(3)
        K_w];
    
 %% Bias model
-T_b1 = 100;
-T_b2 = 50;
-T_b3 = 1000;
+T_b1 = 250;
+T_b2 = 100;
+T_b3 = 100;
 T_b = diag([T_b1, T_b2, T_b3]);
 
 % Noise
-E_b1 = 20;
-E_b2 = 20;
-E_b3 = 1000;
+E_b1 = 80;
+E_b2 = 100;
+E_b3 = 60;
 E_b = diag([E_b1 E_b2 E_b3]);
 
 
