@@ -22,7 +22,7 @@ C_w = [zeros(3) eye(3)];
 % Noise
 K_w1 = .5;
 K_w2 = .1;
-K_w3 = 0.01;
+K_w3 = 0.1;
 K_w = diag([K_w1 K_w2 K_w3]);
        
 E_w = [zeros(3)
@@ -31,13 +31,13 @@ E_w = [zeros(3)
 %% Bias model
 T_b1 = 1000;
 T_b2 = 1000;
-T_b3 = 500;
+T_b3 = 1000;
 T_b = diag([T_b1, T_b2, T_b3]);
 
 % Noise
 E_b1 = 80;
 E_b2 = 80;
-E_b3 = 60;
+E_b3 = 150;
 E_b = diag([E_b1 E_b2 E_b3]);
 
 
@@ -61,8 +61,8 @@ E = [E_w            zeros(6,3);
 H = [C_w     eye(3)     zeros(3, 6)];
 
 %% Tuning matrices for the kalman filter
-Q = diag([.1 .1 .01 10 10 10]);
-R = diag([0.01 .01 0.001]);
+Q = diag([.1 .1 .1 100 100 10000]);
+R = diag([0.01 .01 0.0001]);
 P_0_priori = eye(15)*0.1;
 x0 = zeros(15, 1);
 x0(7:9) = eta0([1,2,6]);
