@@ -5,7 +5,7 @@ end
 
 eta = input(1:3);
 tau = input(4:6);
-
+global Q_true
 persistent x_pri P_pri init_flag f_x f_x_jacobi data R_psi
 
 if isempty(init_flag)

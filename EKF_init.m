@@ -7,9 +7,9 @@ T_w2 = 9;
 T_w3 = 9;
 
 % Wave damping
-zeta_1 = 0.02;
-zeta_2 = 0.02;
-zeta_3 = 0.02;
+zeta_1 = 0.05;
+zeta_2 = 0.05;
+zeta_3 = 0.05;
 
 % Wave frequencies and damping
 Omega = diag(2*pi ./ [T_w1 T_w2 T_w3]);
@@ -29,14 +29,14 @@ E_w = [zeros(3)
        K_w];
    
 %% Bias model
-T_b1 = 250;
-T_b2 = 100;
-T_b3 = 100;
+T_b1 = 1000;
+T_b2 = 1000;
+T_b3 = 500;
 T_b = diag([T_b1, T_b2, T_b3]);
 
 % Noise
 E_b1 = 80;
-E_b2 = 100;
+E_b2 = 80;
 E_b3 = 60;
 E_b = diag([E_b1 E_b2 E_b3]);
 
@@ -62,9 +62,11 @@ H = [C_w     eye(3)     zeros(3, 6)];
 
 %% Tuning matrices for the kalman filter
 Q = diag([.1 .1 .01 10 10 10]);
-R = diag([0.001 .001 0.001]);
-P_0_priori = eye(15)*.1;    
+R = diag([0.01 .01 0.001]);
+P_0_priori = eye(15)*0.1;
 x0 = zeros(15, 1);
+x0(7:9) = eta0([1,2,6]);
+x0(13:end) = nu0([1,2,6]);
 
 %% 
 kalman_data = struct('M',   M, ...
