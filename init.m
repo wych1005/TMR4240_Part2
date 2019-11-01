@@ -9,6 +9,7 @@
 
 clear all;
 
+addpath('simulink');
 load('supply.mat');
 load('supplyABC.mat');
 load('thrusters_sup.mat');
