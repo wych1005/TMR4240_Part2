@@ -10,6 +10,8 @@
 clear all;
 
 addpath('simulink');
+addpath('plotting');
+
 load('supply.mat');
 load('supplyABC.mat');
 load('thrusters_sup.mat');
