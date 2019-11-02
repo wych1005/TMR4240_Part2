@@ -26,8 +26,8 @@ Ts = 0.1; % Step size
 simFile = "final_v2_R2019a.slx";
 
 savePlots = 0; % 1: Save plots as ESP in the /plots folder
-SimulationToRun = 5; % Manual control in simulink
+SimulationToRun = 8; % Manual control in simulink
 
 useEKF = true;
-% useRefM = 1;
+useRefM = true;
 
