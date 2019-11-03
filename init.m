@@ -17,7 +17,7 @@ load('supplyABC.mat');
 load('thrusters_sup.mat');
 
 % Initial position x, y, z, theta, phi, psi
-eta0 = [0,0,0,0,0,pi/4]';
+eta0 = [0,0,0,0,0,0]';
 % Initial velocity u, v, w, p, q, r
 nu0 = [0,0,0,0,0,0]';
 
@@ -26,7 +26,7 @@ Ts = 0.1; % Step size
 simFile = "part2_main.slx";
 
 savePlots = 0; % 1: Save plots as ESP in the /plots folder
-SimulationToRun = 1; % Manual control in simulink
+SimulationToRun = 7; % Manual control in simulink
 
 useEKF = true;
 useRefM = true;
@@ -36,12 +36,12 @@ useObsv = true;
 useThr = true;
 
 simTimes = [0 300;
-            0 2600;
-            0 2600;
+            0 1600;
+            0 2000;
+            0 100;
+            0 1600;
             0 1000;
-            0 2600;
-            0 1000;
-            0 2000];
+            0 1000];
         
 % Configure waves
 set_param('part2_main/Wave', 'waveforces', 'on');
@@ -50,14 +50,13 @@ set_param('part2_main/Waves', 'omega_peak', '2*pi/9'); %Tp = 9s
 set_param('part2_main/Waves', 'psi_mean', 'pi*5/4'); % From NE
 
 % Configure wind
-set_param('wind_model/Wind1', 'Par_Wind_V', '10'); %Avg speed 10 m/s
-set_param('wind_model/Wind1', 'Par_Wind_angle', 'pi'); % From north
+set_param('wind_model/Wind1', 'u_mean_10', '10'); %Avg speed 10 m/s
+set_param('wind_model/Wind1', 'dir_mean', 'pi'); % From north
 
 %% Simulation 1
 if SimulationToRun == 1  
-    sim('part2_main.slx', simTimes(SimulationToRun, :));
-    run(['plotting_' num2str(SimulationToRun ) '.m']);
-    disp('Done')
+    useThr = false;
+    run(['plotting_' num2str(SimulationToRun )]);
 end
 
 %%Simulate for 300 seconds with current from East, with average speed of 0.2 [m/s] and wind
@@ -70,9 +69,9 @@ end
 %% Simulation 2
 if SimulationToRun == 2
     useWindM = false;
-    useWaves = false;
     useWaveM = false;
-    run(['plotting' num2str(SimulationToRun ) '.m']);
+    useObsv = false;
+    set_param('part2_main/Wave', 'waveforces', 'off');
 end
 
 % Disable the environmental forces and plot the desired force calculated by your controller,
@@ -82,8 +81,9 @@ end
 % Perform the 4 corner DP test from Part 1:
 %% Simulation 3
 if SimulationToRun == 3
-    %
-    run(['plotting' num2str(SimulationToRun ) '.m']);
+    useWindM = true;
+    set_param('part2_main/Wave', 'waveforces', 'on');    
+    useObsv = false;
 end
 % Perform the 4 corner DP test using the environmental conditions presented in Simulation
 % 1 and the thrust allocation from Simulation 2 (without thruster failure). There shall be
@@ -93,8 +93,15 @@ end
 % model contains velocity trajectories, then plot these with the actual velocities.
 %% Simulation 4
 if SimulationToRun == 4
-    %
-    run(['plotting' num2str(SimulationToRun ) '.m']);
+    useObsv = true;
+    
+    disp('Using EKF');
+    useEKF = true;
+    sim('part2_main.slx', simTimes(SimulationToRun, :));
+    run(['plotting_' num2str(SimulationToRun )]);
+    
+    disp('Using NPO');
+    useEKF = false;    
 end
 % Use the same environmental conditions as in Simulation 1. The desired DP force shall be
 % fixed at [1 1 1] · 104
@@ -105,7 +112,6 @@ end
 %% Simulation 5
 if SimulationToRun == 5
     %
-    run(['plotting' num2str(SimulationToRun ) '.m']);
 end
 % With the selected observer, run a 4 corner DP test, including the full DP system and the
 % environmental conditions.
@@ -117,7 +123,6 @@ end
 %% Simulation 6
 if SimulationToRun == 6
     %
-    run(['plotting' num2str(SimulationToRun ) '.m']);
 end
 
 % Make a thrust utilization plot for the vessel for a fixed weather condition, U3 = 15 [m/s],
@@ -129,9 +134,18 @@ end
 % degree.
 %% Simulation 7
 if SimulationToRun == 7
-    %
-    run(['plotting' num2str(SimulationToRun ) '.m']);
+    % Configure waves
+    useEKF = true;
+    set_param('part2_main/Waves', 'hs', '2.5'); % 2.5 m
+    set_param('part2_main/Waves', 'omega_peak', '2*pi/9'); %Tp = 9s
 end
 % Verify if your observers are robust by changing the wave height to 8 [m] and period to 13
 % [s], use the same current and wind values from Simulation 1. Then plot the vessel position
 % over 1000 seconds, for station keeping at the origin (ηSP = [0 0 0]).
+
+
+
+
+fprintf('Total Simulation time: %.0f sec\n', simTimes(SimulationToRun, 2));
+sim('part2_main.slx', simTimes(SimulationToRun, :));
+run(['plotting_' num2str(SimulationToRun )]);
