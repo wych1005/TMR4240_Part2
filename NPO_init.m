@@ -1,5 +1,5 @@
 disp('NPO Init');
-EKF_init; % Required for the wave model
+% EKF_init; % Required for the wave model
 
 % Tuning values
 w_o = 2*pi/9; % Wave peak frequency
@@ -7,6 +7,11 @@ lambda = 0.1;
 w_c = 1.2* w_o; % Filter cut off
 
 T = diag([1000 1000 1000]); % Bias time constants
+
+% Bias gains
+K_4 = 100000*diag([1 1 1]);
+K_3 = 0.1 * K_4;
+
 
 
 K_1i = -2*(1-lambda) * w_c/w_o;
@@ -17,10 +22,6 @@ K_1 = [diag([K_1i K_1i K_1i]);
        diag([K_1i3 K_1i3 K_1i3])];
    
 K_2 = K_2i * eye(3);
-
-% Bias gains
-K_4 = 10000*diag([10 0.1 0.01]);
-K_3 = 0.1 * K_4;
 
 
 % Ensure passivity

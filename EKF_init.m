@@ -7,9 +7,9 @@ T_w2 = 9;
 T_w3 = 9;
 
 % Wave damping
-zeta_1 = 0.05;
-zeta_2 = 0.05;
-zeta_3 = 0.05;
+zeta_1 = 0.07;
+zeta_2 = 0.07;
+zeta_3 = 0.07;
 
 % Wave frequencies and damping
 Omega = diag(2*pi ./ [T_w1 T_w2 T_w3]);
@@ -61,9 +61,9 @@ E = [E_w            zeros(6,3);
 H = [C_w     eye(3)     zeros(3, 6)];
 
 %% Tuning matrices for the kalman filter
-Q = diag([.1 .1 .1 100 100 10000]);
+Q = diag([.1 .1 0.01 100 100 10000]);
 R = diag([0.01 .01 0.0001]);
-P_0_priori = eye(15)*0.1;
+P_0_priori = eye(15)*0.00001;
 x0 = zeros(15, 1);
 x0(7:9) = eta0([1,2,6]);
 x0(13:end) = nu0([1,2,6]);
