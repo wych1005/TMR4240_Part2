@@ -1,5 +1,5 @@
     % PID-Controller gains
-Kp = [7e5 8e4 3e7];
+Kp = [4e5 8e4 3e7];
 Ki = [8e3 1e3 1e5];
 Kd = [4e6 1e4 4e3];
 
