@@ -30,4 +30,5 @@ SimulationToRun = 8; % Manual control in simulink
 
 useEKF = true;
 useRefM = true;
+useWindM = true;
 
