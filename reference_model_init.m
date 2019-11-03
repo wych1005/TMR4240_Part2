@@ -1,6 +1,3 @@
-% Use Refecende model?
-useRefM = 1;
-
 % Reference model
 omega_refm = [0.03 0.03 0.05];
 delta_refm = [1 1 1];
