@@ -17,7 +17,7 @@ load('supplyABC.mat');
 load('thrusters_sup.mat');
 
 % Initial position x, y, z, theta, phi, psi
-eta0 = [0,0,0,0,0,0]';
+eta0 = [0,0,0,0,0,pi/4]';
 % Initial velocity u, v, w, p, q, r
 nu0 = [0,0,0,0,0,0]';
 
@@ -26,12 +26,14 @@ Ts = 0.1; % Step size
 simFile = "part2_main.slx";
 
 savePlots = 0; % 1: Save plots as ESP in the /plots folder
-SimulationToRun = 8; % Manual control in simulink
+SimulationToRun = 1; % Manual control in simulink
 
 useEKF = true;
 useRefM = true;
 useWindM = true;
 useWaveM = true;
+useObsv = true;
+useThr = true;
 
 simTimes = [0 300;
             0 2600;
@@ -40,12 +42,22 @@ simTimes = [0 300;
             0 2600;
             0 1000;
             0 2000];
+        
+% Configure waves
+set_param('part2_main/Wave', 'waveforces', 'on');
+set_param('part2_main/Waves', 'hs', '2.5'); % 2.5 m
+set_param('part2_main/Waves', 'omega_peak', '2*pi/9'); %Tp = 9s
+set_param('part2_main/Waves', 'psi_mean', 'pi*5/4'); % From NE
+
+% Configure wind
+set_param('wind_model/Wind1', 'Par_Wind_V', '10'); %Avg speed 10 m/s
+set_param('wind_model/Wind1', 'Par_Wind_angle', 'pi'); % From north
 
 %% Simulation 1
 if SimulationToRun == 1  
-    
-    run(['plotting' num2str(SimulationToRun ) '.m']);
     sim('part2_main.slx', simTimes(SimulationToRun, :));
+    run(['plotting_' num2str(SimulationToRun ) '.m']);
+    disp('Done')
 end
 
 %%Simulate for 300 seconds with current from East, with average speed of 0.2 [m/s] and wind
