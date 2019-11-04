@@ -136,8 +136,8 @@ end
 if SimulationToRun == 7
     % Configure waves
     useEKF = true;
-    set_param('part2_main/Waves', 'hs', '2.5'); % 2.5 m
-    set_param('part2_main/Waves', 'omega_peak', '2*pi/9'); %Tp = 9s
+    set_param('part2_main/Waves', 'hs', '8'); % 2.5 m
+    set_param('part2_main/Waves', 'omega_peak', '2*pi/13'); %Tp = 9s
 end
 % Verify if your observers are robust by changing the wave height to 8 [m] and period to 13
 % [s], use the same current and wind values from Simulation 1. Then plot the vessel position
