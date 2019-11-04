@@ -41,5 +41,5 @@ xlabel('Time [s]'); ylabel('Speed [m/s]');
 set(gcf,'Position',[300 200 700 500])
 
 if savePlots
-saveas(gcf,['plotting/plots/sim' num2str(SimulationToRun) '_speed.eps']);
+print(['plotting/plots/sim' num2str(SimulationToRun) '_speed.eps'],'-depsc')
 end

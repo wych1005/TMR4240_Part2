@@ -25,7 +25,7 @@ Ts = 0.1; % Step size
 
 simFile = "part2_main.slx";
 
-savePlots = false; % true: Save plots as ESP in the /plots folder
+savePlots = true; % true: Save plots as ESP in the /plots folder
 SimulationToRun = 3; % Manual control in simulink
 
 useEKF = true;
@@ -38,7 +38,7 @@ useThr = true;
 simTimes = [0 300;
             0 1600;
             0 2000;
-            0 100;
+            0 200;
             0 1600;
             0 1000;
             0 1000];

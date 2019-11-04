@@ -11,5 +11,5 @@ grid on;
 axis equal
 
 if savePlots
-saveas(gcf,['plotting/plots/sim' num2str(SimulationToRun) '_ned.eps']);
+print(['plotting/plots/sim' num2str(SimulationToRun) '_ned.eps'],'-depsc')
 end

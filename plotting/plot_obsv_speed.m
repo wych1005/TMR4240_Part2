@@ -25,11 +25,11 @@ else
     subplot(2,2, [3 4]);
     plot(t, rad2deg(nu_hat.Data(:, 3)),'-.', 'linewidth', 1);
     legend('Actual', 'EKF', 'NPO', 'orientation', 'horizontal', 'location', 'northoutside')
+    
+    if savePlots
+    print(['plotting/plots/sim' num2str(SimulationToRun) '_obsv_speed.eps'],'-depsc')
+    end
 end
 
 
 set(gcf,'Position',[300 200 700 500])
-
-if savePlots
-saveas(gcf,['plotting/plots/sim' num2str(SimulationToRun) '_obsv_speed.eps']);
-end
