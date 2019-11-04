@@ -25,8 +25,8 @@ Ts = 0.1; % Step size
 
 simFile = "part2_main.slx";
 
-savePlots = 0; % 1: Save plots as ESP in the /plots folder
-SimulationToRun = 7; % Manual control in simulink
+savePlots = false; % true: Save plots as ESP in the /plots folder
+SimulationToRun = 3; % Manual control in simulink
 
 useEKF = true;
 useRefM = true;
@@ -56,7 +56,7 @@ set_param('wind_model/Wind1', 'dir_mean', 'pi'); % From north
 %% Simulation 1
 if SimulationToRun == 1  
     useThr = false;
-    run(['plotting_' num2str(SimulationToRun )]);
+%     run(['plotting_' num2str(SimulationToRun )]);
 end
 
 %%Simulate for 300 seconds with current from East, with average speed of 0.2 [m/s] and wind
@@ -111,7 +111,7 @@ end
 % are added to the signal).
 %% Simulation 5
 if SimulationToRun == 5
-    %
+
 end
 % With the selected observer, run a 4 corner DP test, including the full DP system and the
 % environmental conditions.

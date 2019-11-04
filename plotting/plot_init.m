@@ -1,3 +1,4 @@
+disp('Plot init')
 % close all
 t = (logsout{1}.Values.Time);
 
