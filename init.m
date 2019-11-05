@@ -26,9 +26,14 @@ Ts = 0.1; % Step size
 simFile = "part2_main.slx";
 
 savePlots = false; % true: Save plots as ESP in the /plots folder
-SimulationToRun = 6; % Manual control in simulink
+% SimulationToRun = 6; % Manual control in simulink
+SimulationToRun = input('Select which task to simulate, from 1 to 7: '); 
+if SimulationToRun < 1 || SimulationToRun > 7
+    error('There is no such task');
+end
 
 sim7Current = 0;
+sim6Current = 0.2;
 
 useEKF = true;
 useRefM = true;
@@ -114,7 +119,16 @@ end
 % are added to the signal).
 %% Simulation 5
 if SimulationToRun == 5
+tic;
+    % Configure waves
+    set_param('part2_main/Wave', 'waveforces', 'on');
+    set_param('part2_main/Waves', 'hs', '5');
+    set_param('part2_main/Waves', 'omega_peak', '2*pi/10'); 
 
+    % Configure wind
+    set_param('wind_model/Wind1', 'u_mean_10', '15');  
+
+toc;
 end
 % With the selected observer, run a 4 corner DP test, including the full DP system and the
 % environmental conditions.
