@@ -27,7 +27,7 @@ else
     legend('Actual', 'EKF', 'NPO', 'orientation', 'horizontal', 'location', 'northoutside')
     
     if savePlots
-    print(['plotting/plots/sim' num2str(SimulationToRun) '_obsv_speed.eps'],'-depsc')
+    print(['plotting/plots/sim' num2str(SimulationToRun) '_obsv_speed' sim4NoEnv '.eps'],'-depsc')
     end
 end
 

@@ -3,7 +3,7 @@ plot_init
 figure(1); clf
 plot_xy(eta.Data(:, 1), eta.Data(:, 2), eta.Data(:, 3), t, true, 100);
 if savePlots
-print(['plotting/plots/sim' num2str(SimulationToRun) '_ned.eps'],'-depsc')
+print(['plotting/plots/sim' num2str(SimulationToRun) '_ned' sim2ThrFault '.eps'],'-depsc')
 end
 
 % figure(2);

@@ -21,5 +21,5 @@ xlabel('Time [s]'); ylabel('Moment [kNm]');
 set(gcf,'Position',[300 200 700 600])
 
 if savePlots
-print(['plotting/plots/sim' num2str(SimulationToRun) '_forces.eps'],'-depsc')
+print(['plotting/plots/sim' num2str(SimulationToRun) '_forces' sim2ThrFault '.eps'],'-depsc')
 end

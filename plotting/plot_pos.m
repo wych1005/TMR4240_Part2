@@ -45,5 +45,5 @@ xlabel('Time [s]'); ylabel('Heading [\psi]');
 set(gcf,'Position',[300 200 700 500])
 
 if savePlots
-print(['plotting/plots/sim' num2str(SimulationToRun) '_xyz.eps'],'-depsc')
+print(['plotting/plots/sim' num2str(SimulationToRun) '_xyz' sim2ThrFault '.eps'],'-depsc')
 end

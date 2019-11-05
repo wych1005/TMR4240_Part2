@@ -17,17 +17,17 @@ if useEKF
 else
 %%
     subplot(221)
-    plot(t, eta_hat.Data(:, 1), '-.', 'linewidth', 1); hold on
+    plot(t, eta_hat.Data(:, 1), '-.', 'linewidth', 1); hold off
     subplot(222);
-    plot(t, eta_hat.Data(:, 2), '-.', 'linewidth', 1); grid on
+    plot(t, eta_hat.Data(:, 2), '-.', 'linewidth', 1); grid on; hold off
     
     
     subplot(2,2, [3 4]);
-    plot(t, rad2deg(eta_hat.Data(:, 3)),'-.', 'linewidth', 1);
+    plot(t, rad2deg(eta_hat.Data(:, 3)),'-.', 'linewidth', 1); hold off
     legend('Actual', 'EKF', 'NPO', 'orientation', 'horizontal', 'location', 'northoutside')
     
     if savePlots
-    print(['plotting/plots/sim' num2str(SimulationToRun) '_obsv_xyz.eps'],'-depsc')
+    print(['plotting/plots/sim' num2str(SimulationToRun) '_obsv_xyz' sim4NoEnv '.eps'],'-depsc')
     end
 end
 
