@@ -12,7 +12,7 @@ if useEKF
     plot(t, rad2deg(nu.Data(:, 3)), t, rad2deg(nu_hat.Data(:, 3)),'--', 'linewidth', 1);
     title('Heading rate'); grid on; hold on;
     xlabel('Time [s]');
-    ylabel('Angular Velocity [deg]');
+    ylabel('Angular Velocity [deg/s]');
 
 else
 %%

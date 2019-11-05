@@ -25,18 +25,18 @@ title('Velocity East');
 xlabel('Time [s]'); ylabel('Speed [m/s]');
 
 subplot(2,2, [3 4]);
-plot(t, (nu.Data(:, 3)),  'linewidth', 1); grid on; hold on
+plot(t, rad2deg(nu.Data(:, 3)),  'linewidth', 1); grid on; hold on
 if SimulationToRun > 1
-    plot(t, (nu_ref.Data(:, 3)), 'linewidth', 1);
+    plot(t, rad2deg(nu_ref.Data(:, 3)), 'linewidth', 1);
 end
 if SimulationToRun > 4
-    plot(t, (nu_hat.Data(:, 3)), '--',  'linewidth', 1);
+    plot(t, rad2deg(nu_hat.Data(:, 3)), '--',  'linewidth', 1);
 end
 
 legend('Actual', 'Reference', 'Estimated', 'orientation', 'horizontal', 'location', 'northoutside');
 
 title('Velocity Heading');
-xlabel('Time [s]'); ylabel('Speed [m/s]');
+xlabel('Time [s]'); ylabel('Speed [deg/s]');
 
 set(gcf,'Position',[300 200 700 500])
 
