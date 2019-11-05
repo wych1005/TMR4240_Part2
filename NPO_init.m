@@ -9,7 +9,7 @@ w_c = 1.2* w_o; % Filter cut off
 T = diag([1000 1000 1000]); % Bias time constants
 
 % Bias gains
-K_4 = 100000*diag([1 1 1]);
+K_4 = 100000*diag([1 1 100]);
 K_3 = 0.1 * K_4;
 
 

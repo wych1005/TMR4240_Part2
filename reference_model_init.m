@@ -1,5 +1,5 @@
 % Reference model
-omega_refm = [0.03 0.03 0.05];
+omega_refm = [0.035 0.035 0.04];
 delta_refm = [1 1 1];
 
 % Saturation limits
