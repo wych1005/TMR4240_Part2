@@ -41,6 +41,7 @@ useWindM = true;
 useWaveM = true;
 useObsv = true;
 useThr = true;
+useCurrentM = true;
 
 simTimes = [0 300;
             0 1600;
