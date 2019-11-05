@@ -1,5 +1,6 @@
-% plot_init
+plot_init
 % 
-% figure(1); clf;
+figure(1); clf;
 % plot_pos;
 plotting_2
+

@@ -25,8 +25,10 @@ Ts = 0.1; % Step size
 
 simFile = "part2_main.slx";
 
-savePlots = true; % true: Save plots as ESP in the /plots folder
-SimulationToRun = 3; % Manual control in simulink
+savePlots = false; % true: Save plots as ESP in the /plots folder
+SimulationToRun = 6; % Manual control in simulink
+
+sim7Current = 0;
 
 useEKF = true;
 useRefM = true;
@@ -40,9 +42,10 @@ simTimes = [0 300;
             0 2000;
             0 200;
             0 1600;
-            0 1000;
+            0 400;
             0 1000];
-        
+
+        load_system(simFile); load_system('wind_model.slx');
 % Configure waves
 set_param('part2_main/Wave', 'waveforces', 'on');
 set_param('part2_main/Waves', 'hs', '2.5'); % 2.5 m
@@ -122,7 +125,29 @@ end
 
 %% Simulation 6
 if SimulationToRun == 6
-    %
+    tic;
+    disp('Calculating Capability Plot');
+    % Configure waves
+    set_param('part2_main/Wave', 'waveforces', 'on');
+    set_param('part2_main/Waves', 'hs', '5');
+    set_param('part2_main/Waves', 'omega_peak', '2*pi/10'); 
+
+    % Configure wind
+    set_param('wind_model/Wind1', 'u_mean_10', '15');
+    
+    for angle = 0:10:360
+        fprintf('Environmental forces from %.0f degree\n', angle);
+        sim6Current = angle;
+        set_param('wind_model/Wind1', 'dir_mean', num2str(deg2rad(angle)));
+        set_param('part2_main/Waves', 'psi_mean', num2str(deg2rad(angle))); 
+        pause(1);
+        sim('part2_main.slx', simTimes(SimulationToRun, :));
+        plot_init;
+        thrAvgData(angle/10+1, :) = [angle, sum(mean(abs(u_thr.Data(t>100, :))))];
+    end
+    
+    thrAvgData(:, 2) = thrAvgData(:, 2)./sum([thrusters.thrust])*100;
+    toc;
 end
 
 % Make a thrust utilization plot for the vessel for a fixed weather condition, U3 = 15 [m/s],
@@ -144,8 +169,9 @@ end
 % over 1000 seconds, for station keeping at the origin (ηSP = [0 0 0]).
 
 
-
-
-fprintf('Total Simulation time: %.0f sec\n', simTimes(SimulationToRun, 2));
-sim('part2_main.slx', simTimes(SimulationToRun, :));
+%%
+if SimulationToRun ~= 6
+    fprintf('Total Simulation time: %.0f sec\n', simTimes(SimulationToRun, 2));
+    sim('part2_main.slx', simTimes(SimulationToRun, :));
+end
 run(['plotting_' num2str(SimulationToRun )]);
