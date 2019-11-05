@@ -1,4 +1,4 @@
-function x_hat = EKF(input)
+function x_hat = EKF_func(input)
 if size(input) ~= [6 1]
     error('Invalid size on inputs, expected [eta,tau] := [3x1, 3x1]')
 end
