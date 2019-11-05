@@ -1,4 +1,4 @@
-disp('Plot init')
+disp('Updating measured variables')
 % close all
 t = (logsout{1}.Values.Time);
 
