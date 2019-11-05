@@ -32,8 +32,7 @@ if SimulationToRun < 1 || SimulationToRun > 7
     error('There is no such task');
 end
 
-sim7Current = 0;
-sim6Current = 0.2;
+sim6CurrentAngle = 0;
 
 useEKF = true;
 useRefM = true;
@@ -152,7 +151,7 @@ if SimulationToRun == 6
     
     for angle = 0:10:360
         fprintf('Environmental forces from %.0f degree\n', angle);
-        sim6Current = angle;
+        sim6CurrentAngle = angle;
         set_param('wind_model/Wind1', 'dir_mean', num2str(deg2rad(angle)));
         set_param('part2_main/Waves', 'psi_mean', num2str(deg2rad(angle))); 
         pause(1);
