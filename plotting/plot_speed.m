@@ -38,7 +38,7 @@ legend('Actual', 'Reference', 'Estimated', 'orientation', 'horizontal', 'locatio
 title('Velocity Heading');
 xlabel('Time [s]'); ylabel('Speed [deg/s]');
 
-set(gcf,'Position',[300 200 700 500])
+set(gcf,'Position',[300 200 900 500])
 
 if savePlots
 print(['plotting/plots/sim' num2str(SimulationToRun) '_speed' sim2ThrFault '.eps'],'-depsc')

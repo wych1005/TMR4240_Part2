@@ -56,7 +56,7 @@ function plot_xy(x, y, psi, t, vessel, scale, labels)
     % Plot trajectory
     plot(y, x, 'r', 'linewidth', 2);
     drawnow
-    hold off; grid on;
+    hold off; grid on; box on;
     axis equal
     
     
@@ -66,5 +66,6 @@ function plot_xy(x, y, psi, t, vessel, scale, labels)
     end
     title(labels{1});
     xlabel(labels{2}); ylabel(labels{3});
+    
 
     set(gcf,'Position',[300 200 700 600])

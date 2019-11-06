@@ -51,7 +51,7 @@ xlabel('Time [s]'); ylabel('Angle [deg]'); hold off;
 legend('Azi 1', 'Azi aft SB', 'Azi aft Port', 'orientation' ,'horizontal', 'location', 'northoutside')
 
 
-set(gcf,'Position',[300 200 700 700])
+set(gcf,'Position',[300 200 900 700])
 
 if savePlots
 print(['plotting/plots/sim' num2str(SimulationToRun) '_thrusters' sim2ThrFault '.eps'],'-depsc')

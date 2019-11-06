@@ -18,7 +18,7 @@ plot(t, tau_thr.Data(:, 6)/1000, 'linewidth', 1); hold off;
 title('Moment in Yaw-direction')
 xlabel('Time [s]'); ylabel('Moment [kNm]');
 
-set(gcf,'Position',[300 200 700 600])
+set(gcf,'Position',[300 200 900 600])
 
 if savePlots
 print(['plotting/plots/sim' num2str(SimulationToRun) '_forces' sim2ThrFault '.eps'],'-depsc')

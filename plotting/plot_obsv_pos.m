@@ -32,4 +32,4 @@ else
 end
 
 
-set(gcf,'Position',[300 200 700 500])
+set(gcf,'Position',[300 200 900 500])

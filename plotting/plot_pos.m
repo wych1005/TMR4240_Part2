@@ -42,7 +42,7 @@ ylim(rad2deg([min(eta.Data(:, 3))*1.2 max(eta.Data(:, 3))*1.2]));
 title('Heading');
 xlabel('Time [s]'); ylabel('Heading [\psi]');
 
-set(gcf,'Position',[300 200 700 500])
+set(gcf,'Position',[300 200 900 500])
 
 if savePlots
 print(['plotting/plots/sim' num2str(SimulationToRun) '_xyz' sim2ThrFault '.eps'],'-depsc')
