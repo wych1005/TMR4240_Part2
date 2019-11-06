@@ -59,6 +59,7 @@ simTimes = [0 300;
             0 400;
             0 1000];
 
+disp('Loading Simulink File');
 load_system(simFile); load_system('wind_model.slx');
 % Configure waves
 set_param('part2_main/Wave', 'waveforces', 'on');
