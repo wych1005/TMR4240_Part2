@@ -3,7 +3,7 @@
 %                                                                         %
 % Set initial parameters for part1.slx and part2.slx                      %
 %                                                                         %
-% Created:      2018.07.12	Jon Bjørnø                            %
+% Created:      2018.07.12	Jon Bjï¿½rnï¿½                            %
 %                                                                         %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -41,6 +41,7 @@ end
 sim6CurrentAngle = 0;
 sim4NoEnv = '';
 sim2ThrFault = '';
+thr_to_use = [true; true; true; true; true];
 
 useEKF = true;
 useRefM = true;
@@ -76,9 +77,9 @@ set_param('wind_model/Wind1', 'dir_mean', 'pi'); % From north
 % current direction slow variation shall not exceed 5 degrees. Use the same parameters as in
 % Assignment 5
 
-if SimulationToRun == 1  
+if SimulationToRun == 1
+    disp('Running simulation 1 - Environmental Loads');
     useThr = false;
-%     run(['plotting_' num2str(SimulationToRun )]);
 end
 
 %% Simulation 2
@@ -89,10 +90,26 @@ end
 % Perform the 4 corner DP test from Part 1:
 
 if SimulationToRun == 2
+    disp('Running simulation 2 - DP and Thrust Allocation');
     useWindM = false;
     useWaveM = false;
     useObsv = false;
     set_param('part2_main/Wave', 'waveforces', 'off');
+    
+    sim2ThrFault = '';
+    set_param('part2_main/Thruster Dynamics', 'thrusterfault', 'off');
+    
+    fprintf('Total Simulation time: %.0f sec\n', simTimes(SimulationToRun, 2));
+    sim('part2_main.slx', simTimes(SimulationToRun, :));
+    run(['plotting_' num2str(SimulationToRun )]);
+    
+    disp('Press any button to continue with Thruster fault simulation ...');
+    pause;    
+    
+    sim2ThrFault = '_fault';
+    thr_to_use = [true; false; true; true; false];
+    set_param('part2_main/Thruster Dynamics', 'thrusterfault', 'on');
+    
 end
 
 %% Simulation 3
@@ -103,6 +120,7 @@ end
 % xy-plot. In addition, put the desired trajectory in the individual plots. If the reference
 % model contains velocity trajectories, then plot these with the actual velocities.
 if SimulationToRun == 3
+    disp('Running simulation 3 - DP and Environmental Forces');
     useWindM = true;
     set_param('part2_main/Wave', 'waveforces', 'on');    
     useObsv = false;
@@ -116,6 +134,7 @@ end
 % your observer output with the real measurements (before and after wave forces/moment
 % are added to the signal).
 if SimulationToRun == 4
+    disp('Running simulation 4 - Observer Selection');
     useObsv = true;
     
     disp('With environmental forces');
@@ -154,7 +173,7 @@ end
 % xy-plot. In addition, put the desired trajectory in the individual plots. If the reference
 % model contains velocity trajectories, then plot these with the actual velocities.
 if SimulationToRun == 5
-    %
+    disp('Running simulation 5 - Complete Simulation');
 end
 
 
@@ -167,6 +186,7 @@ end
 % directions are co-linear (having the same direction) and vessel heading ÏˆSP = 0
 % degree.
 if SimulationToRun == 6
+    disp('Running simulation 6 - Capability Plot');
     tic;
     disp('Calculating Capability Plot');
     % Configure waves
@@ -197,6 +217,7 @@ end
 % over 1000 seconds, for station keeping at the origin (Î·SP = [0 0 0]).
 
 if SimulationToRun == 7
+    disp('Running simulation 7 - Observer Robustness');
     % Configure waves
     useEKF = true;
     set_param('part2_main/Waves', 'hs', '8'); % 2.5 m
