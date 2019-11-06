@@ -157,6 +157,7 @@ if SimulationToRun == 4
     useWindM = false;
     
     sim4NoEnv = '_NoEnv';
+    EKF_init;
     
     disp('Without environmental forces');
     disp('Using EKF');
