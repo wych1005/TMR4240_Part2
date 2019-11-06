@@ -70,6 +70,8 @@ set_param('part2_main/Waves', 'psi_mean', 'pi*5/4'); % From NE
 set_param('wind_model/Wind1', 'u_mean_10', '10'); %Avg speed 10 m/s
 set_param('wind_model/Wind1', 'dir_mean', 'pi'); % From north
 
+set_param('part2_main/Thruster Dynamics', 'thrusterfault', 'off');
+    
 %% Simulation 1
 %%Simulate for 300 seconds with current from East, with average speed of 0.2 [m/s] and wind
 % from the north, with average speed of 10 [m/s]. Waves from Northeast with a significant
@@ -188,7 +190,6 @@ end
 if SimulationToRun == 6
     disp('Running simulation 6 - Capability Plot');
     tic;
-    disp('Calculating Capability Plot');
     % Configure waves
     set_param('part2_main/Wave', 'waveforces', 'on');
     set_param('part2_main/Waves', 'hs', '5');
